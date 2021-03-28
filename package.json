@@ -2,13 +2,15 @@
   "name": "bballreferencescraper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Scraper.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "eevanwong",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
+    "neo4j-driver": "^4.2.3",
     "puppeteer": "^8.0.0"
   }
 }
