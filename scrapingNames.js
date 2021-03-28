@@ -7,15 +7,9 @@ function write(array, path) {
   fs.writeFileSync(path, JSON.stringify(array));
 }
 
-function read(path) {
-  const fileContent = fs.readFileSync(path);
-  const array = JSON.parse(fileContent);
-  return array;
-}
-
 async function Scraping() {
   console.log("Opening browser...");
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch();
 
   console.log("Opening page...");
   const page = await browser.newPage();
@@ -24,15 +18,6 @@ async function Scraping() {
   await page.goto("https://www.nba.com/players", {
     waitUntil: "domcontentloaded",
   });
-
-  //   let numTabs = await page.$eval(
-  //     //needs to check how many tabs to determine how many times it should run
-  //     ".Pagination_content__30uR3 > div:nth-child(4)",
-  //     (txt) => {
-  //       //console.log(txt);
-  //       return parseInt(txt.innerHTML.substring(11, txt.length)); //for some reason the string returns "of <!--->{numpgs}"
-  //     }
-  //   );
 
   await page.waitForSelector("#onetrust-accept-btn-handler"); //wait for the cookies button
 
@@ -51,7 +36,7 @@ async function Scraping() {
   console.log(firstNames);
   console.log(lastNames);
 
-  write(firstNames, "/my/path/test.txt");
+  write([firstNames, lastNames], "./txt/names.txt");
 }
 
 /* // Getting first name and last name of first member 
@@ -78,3 +63,12 @@ async function Scraping() {
     return names.map((name) => name.textContent);
   });
 */
+
+//   let numTabs = await page.$eval(
+//     //needs to check how many tabs to determine how many times it should run
+//     ".Pagination_content__30uR3 > div:nth-child(4)",
+//     (txt) => {
+//       //console.log(txt);
+//       return parseInt(txt.innerHTML.substring(11, txt.length)); //for some reason the string returns "of <!--->{numpgs}"
+//     }
+//   );
