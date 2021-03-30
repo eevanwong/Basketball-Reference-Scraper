@@ -1,11 +1,12 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
+const bluebird = require("bluebird")
 
-Scraping();
+pupScraping();
 
-async function Scraping() {
-  const BASE = "https://www.basketball-reference.com";
 
+async function pupScraping() {
+ const BASE = "https://www.basketball-reference.com"
   console.log("Opening browser...");
   const browser = await puppeteer.launch();
 
@@ -13,7 +14,7 @@ async function Scraping() {
   const page = await browser.newPage();
 
   console.log("Going to bballref website");
-  await page.goto("https://www.basketball-reference.com/teams");
+  await page.goto(BASE  + "/teams");
 
   const TLINKS = await page.$$eval(
     //code grabs all active team links
@@ -22,24 +23,24 @@ async function Scraping() {
       return links.map((a) => a.getAttribute("href"));
     }
   );
+  let team = {};
 
   //iterate through the links
 
-  let team = {};
 
-  for (let i = 0; i < TLINKS.length; i++) {
+  for (const url of TLINKS) {
     //get links for past 12 years for each team
-    console.log("Going to" + TLINKS[i]);
-    await page.goto(BASE + TLINKS[i]);
+    console.log("Going to" + url);
+    await page.goto(BASE + url);
     let YLINKS = await page.$$eval("[data-stat='season'] a[href]", (links) => {
       return links.map((a) => a.getAttribute("href"));
     });
-    YLINKS = YLINKS.slice(0, 12);
-    console.log(YLINKS);
+    YLINKS = YLINKS.slice(0, 39); //past 40 seasons
+    //console.log(YLINKS);
 
-    for (let j = 0; j < YLINKS.length; j++) {
-      console.log("Going to " + BASE + YLINKS[j]);
-      await page.goto(BASE + YLINKS[j]);
+    for (const link of YLINKS) {
+      console.log("Going to " + BASE + link);
+      await page.goto(BASE + link);
 
       await page.waitForSelector('#roster [data-stat="player"]');
 
@@ -71,8 +72,8 @@ async function Scraping() {
       let allPlayers = currentRoster.concat(tradedAway);
 
       team[
-        YLINKS[j]
-          .substring(7, YLINKS[j].length)
+        link
+          .substring(7, link.length)
           .replace("/", "-")
           .replace(".html", "")
       ] = allPlayers; //substring will include index 7
@@ -81,7 +82,7 @@ async function Scraping() {
     }
   }
   console.log(team);
-  fs.writeFile("data.json", JSON.stringify(team), (err) => {
+  fs.writeFile("data1.json", JSON.stringify(team), (err) => {
     //writing entire team json to json file
     if (err) {
       console.log("err writing team to json" + "\n");
