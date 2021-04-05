@@ -11,7 +11,7 @@ const driver = neo4j.driver(process.env.URI, neo4j.auth.basic(USER, PASS));
 const session = driver.session();
 
 console.log("Getting json data");
-const DATA = fs.readFileSync("./data1.json");
+const DATA = fs.readFileSync("./data/data1.json");
 console.log("Successfully read json file");
 
 const PLAYERS = JSON.parse(DATA);

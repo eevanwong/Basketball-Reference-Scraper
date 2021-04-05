@@ -1,12 +1,11 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
-const bluebird = require("bluebird")
+const bluebird = require("bluebird");
 
 pupScraping();
 
-
 async function pupScraping() {
- const BASE = "https://www.basketball-reference.com"
+  const BASE = "https://www.basketball-reference.com";
   console.log("Opening browser...");
   const browser = await puppeteer.launch();
 
@@ -14,7 +13,7 @@ async function pupScraping() {
   const page = await browser.newPage();
 
   console.log("Going to bballref website");
-  await page.goto(BASE  + "/teams");
+  await page.goto(BASE + "/teams");
 
   const TLINKS = await page.$$eval(
     //code grabs all active team links
@@ -26,7 +25,6 @@ async function pupScraping() {
   let team = {};
 
   //iterate through the links
-
 
   for (const url of TLINKS) {
     //get links for past 12 years for each team
@@ -72,10 +70,7 @@ async function pupScraping() {
       let allPlayers = currentRoster.concat(tradedAway);
 
       team[
-        link
-          .substring(7, link.length)
-          .replace("/", "-")
-          .replace(".html", "")
+        link.substring(7, link.length).replace("/", "-").replace(".html", "")
       ] = allPlayers; //substring will include index 7
 
       //if they were traded with each other, then they are considered to play on the same team
