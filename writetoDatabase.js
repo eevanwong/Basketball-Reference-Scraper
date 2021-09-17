@@ -1,5 +1,6 @@
 const neo4j = require("neo4j-driver");
 const fs = require("fs");
+const { exit } = require("process");
 
 require("dotenv").config();
 
@@ -12,6 +13,7 @@ const session = driver.session();
 
 async function batchtoDatabase(PLAYERS, TEAMS, count) {
   for (let i = 0; i < TEAMS.length; i++) {
+    console.log('Writing team ' + (i+1) + `(${TEAMS[i]}) of ` + TEAMS.length);
     let players = PLAYERS[TEAMS[i]];
     await session.run("CREATE (n:Team {name: $name})", { name: TEAMS[i] });
 
@@ -43,6 +45,7 @@ function main() {
 
   console.log("Batching to database");
   batchtoDatabase(PLAYERS,TEAMS, count);
+  exit();
 }
 
 //access each team name, and access players that year

@@ -1,8 +1,7 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
+const { exit } = require("process");
 // const bluebird = require("bluebird");
-
-pupScraping();
 
 async function pupScraping() {
   const BASE = "https://www.basketball-reference.com";
@@ -85,8 +84,11 @@ async function pupScraping() {
     }
   });
   await browser.close();
+  exit();
 
   //make an object based off name + teams theyve been on
 
   //https://www.basketball-reference.com/players/a/achiupr01.html
 }
+
+pupScraping();
