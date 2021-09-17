@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
-const bluebird = require("bluebird");
+// const bluebird = require("bluebird");
 
 pupScraping();
 

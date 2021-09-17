@@ -10,24 +10,7 @@ const driver = neo4j.driver(process.env.URI, neo4j.auth.basic(USER, PASS));
 
 const session = driver.session();
 
-console.log("Getting json data");
-const DATA = fs.readFileSync("./data/data1.json");
-console.log("Successfully read json file");
-
-const PLAYERS = JSON.parse(DATA);
-
-//going through each object key using Objects.key()
-const TEAMS = Object.keys(PLAYERS);
-
-let count = 0;
-//double for loop to go through all of the teams and each of the players?
-
-console.log("Batching to database");
-batchtoDatabase();
-
-//access each team name, and access players that year
-
-async function batchtoDatabase() {
+async function batchtoDatabase(PLAYERS, TEAMS, count) {
   for (let i = 0; i < TEAMS.length; i++) {
     let players = PLAYERS[TEAMS[i]];
     await session.run("CREATE (n:Team {name: $name})", { name: TEAMS[i] });
@@ -46,10 +29,22 @@ async function batchtoDatabase() {
   await session.close();
 }
 
-// try {
-//   const result = await session.run("CREATE (n:Team {name: $name}) RETURN a", {
-//     name: personName,
-//   });
-// } finally {
-//   await session.close();
-// }
+function main() {
+  console.log("Getting json data");
+  const DATA = fs.readFileSync("./data/data1.json");
+  console.log("Successfully read json file");
+  const PLAYERS = JSON.parse(DATA);
+
+  //going through each object key using Objects.key()
+  const TEAMS = Object.keys(PLAYERS);
+
+  let count = 0;
+  //double for loop to go through all of the teams and each of the players?
+
+  console.log("Batching to database");
+  batchtoDatabase(PLAYERS,TEAMS, count);
+}
+
+//access each team name, and access players that year
+
+main();
