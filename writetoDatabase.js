@@ -13,10 +13,8 @@ const session = driver.session();
 
 async function batchtoDatabase(PLAYERS, TEAMS, count) {
   for (let i = 0; i < TEAMS.length; i++) {
-    console.log('Writing team ' + (i+1) + `(${TEAMS[i]}) of ` + TEAMS.length);
     let players = PLAYERS[TEAMS[i]];
     await session.run("CREATE (n:Team {name: $name})", { name: TEAMS[i] });
-
     for (let j = 0; j < players.length; j++) {
       //i guess i have to the team each time for a player
       await session.run(
@@ -45,9 +43,8 @@ function main() {
 
   console.log("Batching to database");
   batchtoDatabase(PLAYERS,TEAMS, count);
-  exit();
 }
 
 //access each team name, and access players that year
 
-main();
+main(); //estimated time of completion, 1-2 minutes
