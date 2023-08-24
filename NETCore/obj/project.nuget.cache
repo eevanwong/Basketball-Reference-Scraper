@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "DLMXl5BM4bTUgWWV/yYYLwH6efbSKXapCLqxwWTCDl6Q1Ow1kkoDqSC+1xtX+ty18iYWUoA8gsW3aTj4MY01Bw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Evan\\.nuget\\packages\\htmlagilitypack\\1.11.52\\htmlagilitypack.1.11.52.nupkg.sha512"
+  ],
+  "logs": []
+}
