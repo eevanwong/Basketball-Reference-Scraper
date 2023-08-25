@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text;
 using HtmlAgilityPack;
+using PuppeteerSharp;
 
 class Scraper
 {
@@ -22,18 +23,53 @@ class Scraper
         for (int i = 0; i < teams.Length; i++)
         {
             var teamLink = teamNodes[i].GetAttributeValue("href", "");
-            Console.WriteLine(teamLink);
+            // Console.WriteLine(teamLink);
             teams[i] = teamLink;
         }
 
         return teams;
     }
 
+    private static async Task<string[]> GetSeasonLinks(IPage page, string teamLink)
+    {
+        string[] blank = new string[0];
+        await page.GoToAsync(teamLink);
+
+        var team = teamLink.Substring(43, 3);
+        Console.WriteLine(team);
+        var seasonTags = await page.XPathAsync($"//*[@id='{team}']/tbody/tr/th/a");
+
+        string[] seasonLinks;
+
+        foreach (var tag in seasonTags)
+        {
+            var content = await tag.GetPropertyAsync("href");
+            seasonLinks.Append(content);
+        }
+
+        return seasonLinks;
+    }
+
     static async System.Threading.Tasks.Task Main(string[] args)
     {
         var httpClient = new HttpClient();
-
         var teams = await GetTeams(httpClient);
+        httpClient.Dispose();
+
+        var browser = await Puppeteer.LaunchAsync(new LaunchOptions
+        {
+            Headless = true,
+            ExecutablePath = "C:/Program Files/Google/Chrome/Application/chrome.exe"
+        });
+
+        var page = await browser.NewPageAsync();
+
+
+        for (int i = 0; i < teams.Length; i++)
+        {
+            Console.WriteLine(teams[i]);
+            string[] seasonLinks = await GetSeasonLinks(page, Url + teams[i]);
+        }
 
     }
 }

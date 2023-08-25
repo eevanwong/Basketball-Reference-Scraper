@@ -1,10 +1,24 @@
 {
   "version": 2,
-  "dgSpecHash": "DLMXl5BM4bTUgWWV/yYYLwH6efbSKXapCLqxwWTCDl6Q1Ow1kkoDqSC+1xtX+ty18iYWUoA8gsW3aTj4MY01Bw==",
+  "dgSpecHash": "gdpBF6z7RVrRb9Pmeo7k2CxzOYm9UhzGQV38thWOQ65znpCGMjp4VIS+feUk1M6yWXvGe463RaoxVxeCBBzUjg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Evan\\.nuget\\packages\\htmlagilitypack\\1.11.52\\htmlagilitypack.1.11.52.nupkg.sha512"
+    "C:\\Users\\Evan\\.nuget\\packages\\htmlagilitypack\\1.11.52\\htmlagilitypack.1.11.52.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.0.0\\microsoft.extensions.dependencyinjection.abstractions.2.0.0.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\microsoft.extensions.logging\\2.0.2\\microsoft.extensions.logging.2.0.2.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\2.0.2\\microsoft.extensions.logging.abstractions.2.0.2.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\microsoft.extensions.options\\2.0.2\\microsoft.extensions.options.2.0.2.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\microsoft.extensions.primitives\\2.2.0\\microsoft.extensions.primitives.2.2.0.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\puppeteersharp\\11.0.2\\puppeteersharp.11.0.2.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\system.memory\\4.5.1\\system.memory.4.5.1.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\Evan\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -41,6 +41,10 @@
             "HtmlAgilityPack": {
               "target": "Package",
               "version": "[1.11.52, )"
+            },
+            "PuppeteerSharp": {
+              "target": "Package",
+              "version": "[11.0.2, )"
             }
           },
           "imports": [
