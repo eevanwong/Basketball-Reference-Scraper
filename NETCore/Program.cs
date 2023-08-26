@@ -1,10 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
 using System.Net.Http;
-using System.Runtime.InteropServices;
-using System.Text;
 using HtmlAgilityPack;
 using PuppeteerSharp;
+using System.Collections.Concurrent;
+using System.Linq.Expressions;
 
 class Scraper
 {
@@ -63,19 +63,43 @@ class Scraper
             ExecutablePath = "C:/Program Files/Google/Chrome/Application/chrome.exe"
         });
 
-        var page = await browser.NewPageAsync();
+        var semaphore = new SemaphoreSlim(5);
 
+        var dictionary = new ConcurrentDictionary<string, int>();
 
-        for (int i = 0; i < teams.Length; i++)
+        var tasks = teams.Select(async (team, i) =>
         {
-            Console.WriteLine(teams[i]);
-            List<string> seasonLinks = await GetSeasonLinks(page, Url + teams[i]);
-            // write all links to a file to remove the need to write this process
-            for (int j = 0; j < seasonLinks.Count; j++)
-            {
-                Console.WriteLine(seasonLinks[j]);
-            }
-        }
+            await semaphore.WaitAsync();  // Acquire the semaphore
 
+            try
+            {
+                using (var page = await browser.NewPageAsync())
+                {
+                    Console.WriteLine(team);
+                    List<string> seasonLinks = await GetSeasonLinks(page, Url + team);
+                    // write all links to a file to remove the need to write this process
+                    foreach (var link in seasonLinks)
+                    {
+                        Console.WriteLine(link);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                await browser.CloseAsync();
+                browser.Dispose();
+            }
+            finally
+            {
+                semaphore.Release();
+            }
+        }).ToArray();
+
+        await Task.WhenAll(tasks);
+
+        await browser.CloseAsync();
+        browser.Dispose();
     }
 }
