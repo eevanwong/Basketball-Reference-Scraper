@@ -30,21 +30,21 @@ class Scraper
         return teams;
     }
 
-    private static async Task<string[]> GetSeasonLinks(IPage page, string teamLink)
+    private static async Task<List<string>> GetSeasonLinks(IPage page, string teamLink)
     {
-        string[] blank = new string[0];
-        await page.GoToAsync(teamLink);
+        await page.GoToAsync(teamLink, 45000);
 
         var team = teamLink.Substring(43, 3);
         Console.WriteLine(team);
         var seasonTags = await page.XPathAsync($"//*[@id='{team}']/tbody/tr/th/a");
 
-        string[] seasonLinks;
+        List<string> seasonLinks = new List<string>();
 
         foreach (var tag in seasonTags)
         {
-            var content = await tag.GetPropertyAsync("href");
-            seasonLinks.Append(content);
+            var contentJsHandle = await tag.GetPropertyAsync("href");
+            var link = await contentJsHandle.JsonValueAsync();
+            seasonLinks.Add(link.ToString());
         }
 
         return seasonLinks;
@@ -59,6 +59,7 @@ class Scraper
         var browser = await Puppeteer.LaunchAsync(new LaunchOptions
         {
             Headless = true,
+            Timeout = 45000,
             ExecutablePath = "C:/Program Files/Google/Chrome/Application/chrome.exe"
         });
 
@@ -68,7 +69,12 @@ class Scraper
         for (int i = 0; i < teams.Length; i++)
         {
             Console.WriteLine(teams[i]);
-            string[] seasonLinks = await GetSeasonLinks(page, Url + teams[i]);
+            List<string> seasonLinks = await GetSeasonLinks(page, Url + teams[i]);
+            // write all links to a file to remove the need to write this process
+            for (int j = 0; j < seasonLinks.Count; j++)
+            {
+                Console.WriteLine(seasonLinks[j]);
+            }
         }
 
     }
