@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gdpBF6z7RVrRb9Pmeo7k2CxzOYm9UhzGQV38thWOQ65znpCGMjp4VIS+feUk1M6yWXvGe463RaoxVxeCBBzUjg==",
+  "dgSpecHash": "twC8RuB06EYyVBKNDazOFGiYetnluorhv7Y3esklahqBQOi20laQpHOPmkAAxg4TwWhIhWebV5dRKTxrOAisYA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj",
+  "projectFilePath": "c:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Evan\\.nuget\\packages\\htmlagilitypack\\1.11.52\\htmlagilitypack.1.11.52.nupkg.sha512",
     "C:\\Users\\Evan\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",

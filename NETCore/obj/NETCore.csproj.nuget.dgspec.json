@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj": {}
+    "c:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj": {
+    "c:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj",
+        "projectUniqueName": "c:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj",
         "projectName": "NETCore",
-        "projectPath": "C:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj",
+        "projectPath": "c:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\NETCore.csproj",
         "packagesPath": "C:\\Users\\Evan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\obj\\",
+        "outputPath": "c:\\Users\\Evan\\OneDrive - University of Waterloo\\Desktop\\Projects\\6Degrees\\Basketball-Reference-Scraper\\NETCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Evan\\AppData\\Roaming\\NuGet\\NuGet.Config"
