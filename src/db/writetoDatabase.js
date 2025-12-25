@@ -1,6 +1,5 @@
 const neo4j = require("neo4j-driver");
 const fs = require("fs");
-const { exit } = require("process");
 
 require("dotenv").config();
 const USER = process.env.USER;

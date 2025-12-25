@@ -1,8 +1,9 @@
 const fs = require("fs");
 const { exit } = require("process");
 
+// We need a separate files for names because there are various players with the same name (represented by label); however, they have a differentiation in the value
 function getNames() {
-  const DATA = fs.readFileSync("./data/data1.json");
+  const DATA = fs.readFileSync("./data/data1.json"); // how can we better parallelize this and process this data? What's the fastest way to read from a json file?
   const PLAYERS = JSON.parse(DATA);
 
   const TEAMS = Object.keys(PLAYERS);
