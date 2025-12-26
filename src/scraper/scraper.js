@@ -1,4 +1,4 @@
-import { worker } from './worker.js'
+import { worker, getFailedJobs } from './worker.js'
 import fs from 'fs'
 
 export const BASE_URL = "https://www.basketball-reference.com";
@@ -59,6 +59,15 @@ export default async function scraper(browser) {
   );
 
   await browser.close();
+
+  // Log any failed jobs for debugging purposes
+  const failedJobs = getFailedJobs();
+  if (failedJobs.length > 0) {
+    console.error(`\n${failedJobs.length} job(s) failed after maximum retries:`);
+    failedJobs.forEach(({ url, error }) => {
+      console.error(`  - ${url}: ${error}`);
+    });
+  }
 
   return res;
 }

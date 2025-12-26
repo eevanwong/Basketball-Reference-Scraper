@@ -1,5 +1,9 @@
 import { BASE_URL, getTeamYearUrls, getSeasonRoster } from "./scraper.js";
 
+const MAX_RETRIES = 3;
+const retryCounter = new Map();
+const failedJobs = [];
+
 export async function worker(
     workerId,
     page,
@@ -38,10 +42,33 @@ export async function worker(
                 log(seasonRoster)
                 mergeResultMethod(job_url, seasonRoster);
             }
+            
+            // Clear retry counter on success
+            if (retryCounter.has(job_url)) {
+                retryCounter.delete(job_url);
+            }
         } catch (err) {
-            log(`Error encountered with ${job_url}`)
-            // pushed job back for retry
-            jobs.push(job_url);
+            const currentRetries = retryCounter.get(job_url) || 0;
+            
+            if (currentRetries < MAX_RETRIES) {
+                retryCounter.set(job_url, currentRetries + 1);
+                log(`Error encountered with ${job_url}, retry ${currentRetries + 1}/${MAX_RETRIES}`);
+                jobs.push(job_url);
+            } else {
+                log(`Job failed after ${MAX_RETRIES} retries: ${job_url}`);
+                log(`Error details: ${err.message}`);
+                failedJobs.push({ url: job_url, error: err.message });
+                retryCounter.delete(job_url);
+            }
         }
     }
+}
+
+export function getFailedJobs() {
+    return failedJobs;
+}
+
+export function clearFailedJobs() {
+    failedJobs.length = 0;
+    retryCounter.clear();
 }
