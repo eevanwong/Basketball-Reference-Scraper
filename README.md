@@ -10,7 +10,7 @@ Here, I parsed the past 40 seasons of each NBA team that would be inserted/seede
     - Each worker gets a "job", which is just the url that it needs to scrape, based on the url, it does a corresponding action (check code)
 - Everything is stored in 1 in memory dictionary and at the end of scraping it writes it all to a file 
 
-Notably, as we up the num workers (i.e number of concurrent tasks), the performance does increase each time. Will experiment and see at what point it increases. 
+Notably, as we up the num workers (i.e number of concurrent tasks), the performance does increase each time. Will experiment and see at what point performance plateaus. 
 
 ### A question I asked myself: Why is node.js a reasonable runtime for running multi-threaded web scraping?
 Well, it's not. At least not in comparison to other languages.
