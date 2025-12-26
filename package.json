@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "Scraper.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "runAll": "node scrapingAllInfo.js && node getNames.js && node writetoDatabase.js",
-    "getData": "node scrapingAllInfo.js && node getNames.js"
+    "run": "node ./src/main.js"
   },
   "author": "eevanwong",
   "license": "ISC",

@@ -3,9 +3,14 @@ This is the repo for the batch app of my 6 degrees of NBA project.
 
 Here, I parsed the past 40 seasons of each NBA team that would be insertted/seeded into the neo4j database.
 
-## Refactoring
-- Better usage of async I/O capabilities
-- Transitioning this to TypeScript for better typing - should build in types (personal pref as a dev)
+## Implementation
+- Upon entry, a user will enter a file name
+- The program will establish X num of pages which will correspond to the number of workers tasks that will be active throughout the runtime
+    - Each worker is effectively a task that node.js switches between while its blocked (eg waiting on accessing a request)
+    - Each worker gets a "job", which is just the url that it needs to scrape, based on the url, it does a corresponding action (check code)
+- Everything is stored in 1 in memory dictionary and at the end of scraping it writes it all to a file 
+
+Notably, as we up the num workers (i.e number of concurrent tasks), the performance does increase each time. Will experiment and see at what point it increases. 
 
 ### A question I asked myself: Why is node.js a reasonable runtime for running multi-threaded web scraping?
 Well, it's not. At least not in comparison to other languages.
@@ -22,3 +27,4 @@ The more I learn about multi-threaded workarounds in Node.js, the less I want to
 
 ## ToDos
 - Need to account for duplicate names (can use the identifying url to use the id that basketball-reference.com uses with the player and take that as the value in the db)
+- Transitioning this to TypeScript for better typing - should build in types (personal pref as a dev)
