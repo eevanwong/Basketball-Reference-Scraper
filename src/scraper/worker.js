@@ -10,6 +10,7 @@ export async function worker(
 
     // each worker will log, includes prefix to be able to track which worker is logging
     const PREFIX = `Worker ${workerId}:`
+    const retryCount = {};
     const log = (...args) => console.log(PREFIX, ...args);
     page.setDefaultNavigationTimeout(120000);
     page.setDefaultTimeout(90000);
@@ -35,13 +36,22 @@ export async function worker(
                 let seasonRoster = await getSeasonRoster(BASE_URL + job_url, page)
                 // can write to the file rather to speed this up
                 log(`Writing season roster from ${job_url}:`);
-                log(seasonRoster)
+                // log(seasonRoster)
                 mergeResultMethod(job_url, seasonRoster);
             }
         } catch (err) {
-            log(`Error encountered with ${job_url}`)
+            log(`Error encountered with ${job_url}`);
             // pushed job back for retry
-            jobs.push(job_url);
+            retryCount[job_url] = (retryCount[job_url] ?? 0) + 1;
+            // ^ is a replacement for:
+            // if (!retryCount[job_url]) {
+            //     retryCount[job_url] = 1
+            // } else {
+            //     retryCount[job_url] += 1
+            // }                                                                                                                                                 
+            if (retryCount[job_url] <= 3) {
+                jobs.push(job_url);
+            }
         }
     }
 }
