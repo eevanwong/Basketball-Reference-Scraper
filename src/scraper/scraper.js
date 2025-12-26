@@ -1,5 +1,4 @@
 import { worker } from './worker.js'
-import fs from 'fs'
 
 export const BASE_URL = "https://www.basketball-reference.com";
 // I have all results be in 1 in-memory blob
