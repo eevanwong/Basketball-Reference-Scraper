@@ -43,5 +43,4 @@ function main() {
 }
 
 //access each team name, and access players that year
-
 main(); //estimated time of completion, 1-2 minutes
