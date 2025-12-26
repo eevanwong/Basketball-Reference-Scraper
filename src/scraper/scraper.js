@@ -1,7 +1,7 @@
-import { worker } from './worker'
-const fs = require("fs");
+import { worker } from './worker.js'
+import fs from 'fs'
 
-const BASE_URL = "https://www.basketball-reference.com";
+export const BASE_URL = "https://www.basketball-reference.com";
 // I have all results be in 1 in-memory blob
 const res = Object.create(null);
 
@@ -33,7 +33,7 @@ function getNextJob() {
 
 // Scraping function will setup X worker that individually open and scrape a page of players that have played on a franchise
 export default async function scraper(browser) {
-  const numWorkers = 3;
+  const numWorkers = 5;
 
   // grab team urls from the page
   let page = await browser.newPage();
@@ -60,7 +60,6 @@ export default async function scraper(browser) {
 
   await browser.close();
 
-  await fs.promises.writeFile("data.json", JSON.stringify(res, null, 2));
   return res;
 }
 
@@ -68,9 +67,10 @@ export default async function scraper(browser) {
 async function getTeamUrls(page) {
   await page.goto(BASE_URL + "/teams");
 
+  // in $eval, we run these operations IN the browser -> any global variables here will not be defined here
   const teamUrls = await page.$$eval(
     "#div_teams_active [data-stat='franch_name'] a[href]",
-    (links) => links.map((a) => `${BASE_URL + a.getAttribute("href")}`)
+    (links) => links.map((a) => `${a.getAttribute("href")}`)
   );
   console.log(teamUrls);
   return teamUrls;
@@ -82,7 +82,7 @@ export async function getTeamYearUrls(link, page) {
   let yearUrls = await page.$$eval(
     'th[data-stat="season"] a[href]',
     (links) => {
-      return links.map((a) => `${BASE_URL + a.getAttribute("href")}`);
+      return links.map((a) => `${a.getAttribute("href")}`);
     }
   );
   

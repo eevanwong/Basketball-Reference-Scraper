@@ -1,8 +1,8 @@
-const puppeteer = require('puppeteer');
-const fs = require("fs");
-const readline = require('node:readline');
+import puppeteer from 'puppeteer';
+import fs from 'fs';
+import readline from 'node:readline';
 
-import scraper from './scraper/scraper';
+import scraper from './scraper/scraper.js';
 
 async function main() {
     const rl = readline.createInterface({
@@ -18,7 +18,7 @@ async function main() {
     rl.close();
 
     console.log("Opening browser...");
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({headless: false});
 
     try {
         const start = Date.now();
@@ -27,7 +27,7 @@ async function main() {
         console.log(`Time Taken to execute = ${(end - start) / 1000} seconds`);
         
         // Write result to custom file name
-        await fs.writeFile(`./data/${name}.json`, JSON.stringify(result, null, 2));
+        await fs.writeFile(`./data/${name}.json`, JSON.stringify(result, null, (err) => { console.log(err) }));
         console.log(`Successfully wrote results to ./data/${name}.json`);
     }
     catch (error) {
