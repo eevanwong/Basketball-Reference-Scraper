@@ -1,7 +1,7 @@
 # Basketball Reference Scraper
 This is the repo for the batch app of my 6 degrees of NBA project. 
 
-Here, I parsed the past 40 seasons of each NBA team that would be insertted/seeded into the neo4j database.
+Here, I parsed the past 40 seasons of each NBA team that would be inserted/seeded into the neo4j database.
 
 ## Implementation
 - Upon entry, a user will enter a file name
