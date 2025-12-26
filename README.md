@@ -1,5 +1,5 @@
 # Basketball Reference Scraper
-This is the repo for the batch app of my 6 degrees of NBA project. 
+This is the repo for the batch app of my 6 degrees of NBA project (https://github.com/eevanwong/6-Degrees-of-NBA). 
 
 Here, I parsed the past 40 seasons of each NBA team that would be insertted/seeded into the neo4j database.
 
