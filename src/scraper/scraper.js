@@ -13,12 +13,12 @@ let idx = 0;
 const jobs = [];
 
 // merge results from a worker's job of parsing a season of a team
-function mergeResult(job_url, result) {
-  const key = job_url
-    .substring(43, job_url.length)
+function mergeResult(jobUrl, result, log) {
+  const key = jobUrl
+    .substring(43, jobUrl.length)
     .replace("/", "-")
-    .replace(".html", "")
-  res[key] = result
+    .replace(".html", "");
+  res[key] = result; // create a shallow copy to avoid reference issues
 }
 
 // get next job
@@ -32,7 +32,7 @@ function getNextJob() {
 
 // Scraping function will setup X worker that individually open and scrape a page of players that have played on a franchise
 export default async function scraper(browser) {
-  const numWorkers = 5;
+  const numWorkers = 10;
 
   // grab team urls from the page
   let page = await browser.newPage();
@@ -85,7 +85,7 @@ export async function getTeamYearUrls(link, page) {
     }
   );
   
-  return yearUrls.slice(0, 39); //cut it off at past 40 seasons
+  return yearUrls.slice(0, 1); //cut it off at past 40 seasons - for testing, just make it 5
 }
 
 // in the team pages we need to take both the current roster and the per game stats board since the current roster does not account for trades
