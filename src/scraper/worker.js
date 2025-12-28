@@ -1,4 +1,5 @@
 import { BASE_URL, getTeamYearUrls, getSeasonRoster } from "./scraper.js";
+import setPageSpecs from "./page.js";
 
 export async function worker(
     workerId,
@@ -7,13 +8,11 @@ export async function worker(
     getNextJob, // url - string
     mergeResultMethod,
 ) {
-
     // each worker will log, includes prefix to be able to track which worker is logging
     const PREFIX = `Worker ${workerId}:`
     const retryCount = {};
     const log = (...args) => console.log(PREFIX, ...args);
-    page.setDefaultNavigationTimeout(120000);
-    page.setDefaultTimeout(90000);
+    setPageSpecs(page);
 
     while (true) {
         // a job is a url
@@ -37,7 +36,7 @@ export async function worker(
                 // can write to the file rather to speed this up
                 log(`Writing season roster from ${jobUrl}:`);
                 // log(seasonRoster)
-                mergeResultMethod(fullUrl, seasonRoster, log);
+                mergeResultMethod(fullUrl, seasonRoster);
             }
         } catch (err) {
             log(`Error encountered with ${jobUrl}: ${err}`);

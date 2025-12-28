@@ -22,7 +22,7 @@ async function main() {
 
     console.log("Opening browser...");
     // note, it will not scrape if its headless AND the agent is not set - will explain later:
-    const browser = await puppeteer.launch({headless: false});
+    const browser = await puppeteer.launch({headless: true});
 
     try {
         // need to setup file name to make it consistent when you run from any working directory

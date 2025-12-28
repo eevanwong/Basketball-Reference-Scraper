@@ -1,4 +1,5 @@
 import { worker } from './worker.js'
+import setPageSpecs from './page.js';
 
 export const BASE_URL = "https://www.basketball-reference.com";
 // I have all results be in 1 in-memory blob
@@ -13,7 +14,7 @@ let idx = 0;
 const jobs = [];
 
 // merge results from a worker's job of parsing a season of a team
-function mergeResult(jobUrl, result, log) {
+function mergeResult(jobUrl, result) {
   const key = jobUrl
     .substring(43, jobUrl.length)
     .replace("/", "-")
@@ -36,7 +37,10 @@ export default async function scraper(browser) {
 
   // grab team urls from the page
   let page = await browser.newPage();
-  let teamUrls = await getTeamUrls(page)
+  setPageSpecs(page);
+
+  console.log("Getting Team URLs")
+  let teamUrls = await getTeamUrls(page);
   jobs.push(...teamUrls);
   // await page.close(); // with a small number of pages - we don't need to clean that up until the end when we close the browser
 
